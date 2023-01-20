@@ -12,6 +12,7 @@ class Recognize:
 
     def __init__(self, dic: dict):
         self.words_dic = dic
+        self.similarity_value = 0.8
 
     @staticmethod
     def knowledge_factory(knowledge):
@@ -59,7 +60,7 @@ class Recognize:
         similarities = [Recognize.similar(text, key) for key in self.words_dic.keys()]
         index = similarities.index(max(similarities))
         # print(text_lemma,list(data.values())[index],similarities[index])
-        if similarities[index] > 0.9:
+        if similarities[index] > self.similarity_value:
             return list(self.words_dic.values())[index], similarities[index]
         return None
 
@@ -109,13 +110,13 @@ class Recognize:
 
                 dic[result[0]].append({"value": result[1], "confidence": 1})
 
-            else:
+            elif self.similarity_value < 1:
                 result = self.search_similar(self.get_lemma(token[1]))
                 if result is not None:
-                    if dic.get(result[0]) is None:
-                        dic[result[0]] = []
+                    if dic.get(result[0][0]) is None:
+                        dic[result[0][0]] = []
 
-                    dic[result[0][0]] += {"value": result[0][1], "confidence": result[1]}
+                    dic[result[0][0]].append({"value": result[0][1], "confidence": result[1]})
 
         return dic
 
