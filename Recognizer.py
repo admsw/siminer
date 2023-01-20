@@ -102,7 +102,7 @@ class Recognize:
                 if dic.get(result[0]) is None:
                     dic[result[0]] = []
 
-                dic[result[0]].append({"value": result[1], "confidence": 1})
+                dic[result[0]].append({"value": tokens[token[0] - 1][1] + result[1], "confidence": 1})
 
             elif result is not None:
                 if dic.get(result[0]) is None:
