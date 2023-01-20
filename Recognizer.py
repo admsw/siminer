@@ -1,3 +1,5 @@
+import json
+
 import spacy
 from spacy.lang.fr.stop_words import STOP_WORDS as FR_STOP
 from textacy import extract
@@ -69,15 +71,15 @@ class Recognize:
             return None
 
     def ner_text(self, text):
-        dict = {}
+        dic = {}
         trigram = Recognize.trigrams(text)
         for token in trigram:
             result = self.search(Recognize.get_lemma(str(token)))
             if result is not None:
                 text = text.replace(str(token), '')
                 # print(text)
-                print(result)
-                dict[result[0]] = result[1]
+                # print(result)
+                dic[result[0]] = result[1]
 
         bigram = Recognize.bigrams(text)
         for token in bigram:
@@ -85,8 +87,8 @@ class Recognize:
             if result is not None:
                 text = text.replace(str(token), '')
                 # print(text)
-                print(result)
-                dict[result[0]] = result[1]
+                # print(result)
+                dic[result[0]] = result[1]
 
         tokens = Recognize.main_tokens(text)
         for token in tokens:
@@ -95,13 +97,13 @@ class Recognize:
             if result is not None and result[0] in ['quantite', 'prix', 'caliber', 'conditionnement'] and \
                     tokens[token[0] - 1][
                         2] == "NUM":
-                print("(" + result[0] + "," + tokens[token[0] - 1][1] + result[1] + ")")
-                dict[result[0]] = tokens[token[0] - 1][1] + result[1]
+                # print("(" + result[0] + "," + tokens[token[0] - 1][1] + result[1] + ")")
+                dic[result[0]] = tokens[token[0] - 1][1] + result[1]
 
             elif result is not None:
-                dict[result[0]] = result[1]
+                dic[result[0]] = result[1]
 
-                print(result)
+                # print(result)
 
         ''' 
             else:
@@ -109,8 +111,8 @@ class Recognize:
                 if result!=None:
                     print(token[1],result)
         '''
-        print(dict.keys())
-        print(dict.values())
+        return dic
 
-        print(dict)
-        return dict
+    def ner_text_json(self, text):
+        result = self.ner_text(text)
+        return json.dumps(result)
