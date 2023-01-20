@@ -64,7 +64,7 @@ print(result)
 ```
 
 ```python
-{'variete': 'turnip_round_purple', 'pays': 'US', 'labels': 'by-boat', 'quantite': '270kg', 'sous-famille': 'turnip', 'conditionnement': 'box'}
+{'pays': [{'value': 'US', 'confidence': 1}], 'labels': [{'value': 'by-boat', 'confidence': 1}], 'quantite': [{'value': 'kg', 'confidence': 1}], 'conditionnement': [{'value': 'box', 'confidence': 1}]}
 ```
 
 Recognize sentence to json
@@ -79,7 +79,7 @@ print(result)
 ```
 
 ```python
-{"variete": "turnip_round_purple", "pays": "US", "labels": "by-boat", "quantite": "270kg", "sous-famille": "turnip", "conditionnement": "box"}
+{"pays": [{"value": "US", "confidence": 1}], "labels": [{"value": "by-boat", "confidence": 1}], "quantite": [{"value": "kg", "confidence": 1}], "conditionnement": [{"value": "box", "confidence": 1}]}
 ```
 
 ## Authors

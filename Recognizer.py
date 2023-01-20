@@ -59,7 +59,7 @@ class Recognize:
         similarities = [Recognize.similar(text, key) for key in self.words_dic.keys()]
         index = similarities.index(max(similarities))
         # print(text_lemma,list(data.values())[index],similarities[index])
-        if similarities[index] > 0.5:
+        if similarities[index] > 0.9:
             return list(self.words_dic.values())[index], similarities[index]
         return None
 
@@ -77,40 +77,46 @@ class Recognize:
             result = self.search(Recognize.get_lemma(str(token)))
             if result is not None:
                 text = text.replace(str(token), '')
-                # print(text)
-                # print(result)
-                dic[result[0]] = result[1]
+
+                if dic.get(result[0]) is None:
+                    dic[result[0]] = []
+
+                dic[result[0]].append({"value": result[1], "confidence": 1})
 
         bigram = Recognize.bigrams(text)
         for token in bigram:
             result = self.search(Recognize.get_lemma(str(token)))
             if result is not None:
                 text = text.replace(str(token), '')
-                # print(text)
-                # print(result)
-                dic[result[0]] = result[1]
+                if dic.get(result[0]) is None:
+                    dic[result[0]] = []
+
+                dic[result[0]].append({"value": result[1], "confidence": 1})
 
         tokens = Recognize.main_tokens(text)
         for token in tokens:
-            # print(token.text, token.pos_, token.tag_, token.morph, token.lemma_)
             result = self.search(token[1])
             if result is not None and result[0] in ['quantite', 'prix', 'caliber', 'conditionnement'] and \
-                    tokens[token[0] - 1][
-                        2] == "NUM":
-                # print("(" + result[0] + "," + tokens[token[0] - 1][1] + result[1] + ")")
-                dic[result[0]] = tokens[token[0] - 1][1] + result[1]
+                    tokens[token[0] - 1][2] == "NUM":
+                if dic.get(result[0]) is None:
+                    dic[result[0]] = []
+
+                dic[result[0]].append({"value": result[1], "confidence": 1})
 
             elif result is not None:
-                dic[result[0]] = result[1]
+                if dic.get(result[0]) is None:
+                    dic[result[0]] = []
 
-                # print(result)
+                dic[result[0]].append({"value": result[1], "confidence": 1})
 
-        ''' 
             else:
-                result=search_similar(get_lemma(token[1]))
-                if result!=None:
-                    print(token[1],result)
-        '''
+                result = self.search_similar(self.get_lemma(token[1]))
+                if result is not None:
+                    if dic.get(result[0]) is None:
+                        dic[result[0]] = []
+
+                    dic[result[0][0]] += {"value": result[0][1], "confidence": result[1]}
+
         return dic
 
     def ner_text_json(self, text):
