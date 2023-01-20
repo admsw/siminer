@@ -126,6 +126,17 @@ print(result)
 }
 ```
 
+### convert format
+
+Knowledge can load csv and convert data to json format
+
+```python
+from siminer.Knowledge import Knowledge
+
+know = Knowledge.csv_file_factory("data.csv")
+know.dump_json("data/")
+```
+
 ## Authors
 
 - [Doha Sadiq](https://github.com/SADIQdoha)

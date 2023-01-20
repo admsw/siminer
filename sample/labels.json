@@ -1,0 +1,50 @@
+{
+    "labels": {
+        "ab": [
+            "AB - Agriculture Biologique",
+            "Biologique",
+            "Bio",
+            "AB",
+            "ab"
+        ],
+        "aoc": [
+            "AOC - Appellation d'origine contrôlée",
+            "AOC",
+            "appelation controllé",
+            "Appellation d'origine contrôlée",
+            "aoc"
+        ],
+        "aop": [
+            "AOP - Appellation d'origine protégée",
+            "AOP",
+            "Appellation d'origine protégée",
+            "origine protégée",
+            "aop"
+        ],
+        "fel": [
+            "FeL Partenariat",
+            "FEL",
+            "fel"
+        ],
+        "igp": [
+            "IGP - Indication géographique protégée",
+            "IGP",
+            "Indication géographique protégée",
+            "géographique protégée",
+            "igp"
+        ],
+        "lr": [
+            "Label Rouge",
+            "LR",
+            "lr"
+        ],
+        "by-plane": [
+            "Transport Avion",
+            "by-plane"
+        ],
+        "by-boat": [
+            "Transport Bateau",
+            "by-boat"
+        ]
+    }
+}
