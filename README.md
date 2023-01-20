@@ -66,7 +66,7 @@ print(result)
 
 ```python
 {'pays': [{'value': 'US', 'confidence': 1}], 'labels': [{'value': 'by-boat', 'confidence': 1}],
- 'quantite': [{'value': 'kg', 'confidence': 1}], 'conditionnement': [{'value': 'box', 'confidence': 1}]}
+ 'quantite': [{'value': '270kg', 'confidence': 1}], 'conditionnement': [{'value': 'box', 'confidence': 1}]}
 ```
 
 Recognize sentence to json
@@ -97,7 +97,7 @@ print(result)
     ],
     "quantite": [
         {
-            "value": "kg",
+            "value": "270kg",
             "confidence": 1
         }
     ],
